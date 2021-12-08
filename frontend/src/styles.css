@@ -1,0 +1,71 @@
+@import '~antd/dist/antd.css';
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root,
+#root > #game {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  overflow: hidden;
+}
+
+body {
+  background-color: darkslategray;
+}
+
+#root {
+  overflow: auto;
+}
+
+.gameCanvas {
+  position: fixed;
+  overflow: hidden;
+  overscroll-behavior-y: none;
+  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+  color: black;
+  background: white;
+  cursor: none;
+}
+
+.startup {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  color: white;
+  font-size: 1.2em;
+}
+
+.link {
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  color: white;
+  font-size: 1.2em;
+  display: block;
+  font-weight: bold;
+}
+
+.formBox {
+  background-color: whitesmoke;
+  padding: 1.5em 2.5em;
+  -webkit-box-shadow: 2px 5px 11px 1px rgba(0, 0, 0, 0.16);
+  box-shadow: 2px 5px 11px 1px rgba(0, 0, 0, 0.16);
+  border-radius: 5px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  transform: translate(-50%, -50%);
+}
