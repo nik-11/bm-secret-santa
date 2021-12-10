@@ -17,9 +17,10 @@
     "axios": "^0.24.0",
     "lerp": "1.0.3",
     "lodash-es": "4.17.21",
+    "npm-force-resolutions": "0.0.10",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^4.0.3",
     "three": "0.127.0",
     "zustand": "3.4.1"
   },
@@ -29,10 +30,20 @@
     "react-app-rewired": "^2.1.5"
   },
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "start": "CHOKIDAR_USEPOLLING=true react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "resolutions": {
+    "ansi-regex": "5.0.1",
+    "nth-check": "2.0.1",
+    "set-value": "4.0.1",
+    "immer": "9.0.6",
+    "ansi-html": "https://registry.npmjs.org/ansi-html-community/-/ansi-html-community-0.0.8.tgz",
+    "browserslist": "4.16.5",
+    "glob-parent": "5.1.2"
   },
   "browserslist": [
     ">0.2%",
