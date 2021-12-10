@@ -1,6 +1,8 @@
-const axios = require('axios').default;
+import axios from 'axios';
 import { createHmac } from 'crypto';
-import { Buffer } from 'buffer/';
+import { DateTime } from 'luxon';
+
+axios.interceptors.request.use((request) => console.log(request));
 
 // Super simple "REST" API
 exports.handler = async (event: any, context: any) => {
@@ -35,10 +37,11 @@ exports.handler = async (event: any, context: any) => {
           statusCode = 401;
           responseBody.message = 'Unauthorized: code is invalid';
         } else {
-          const response = await listAccounts().catch((err) => {
-            console.log(err.response.request);
-            console.log(err.response.data);
-          });
+          const response = await showAccount(process.env.WALLET!).catch(
+            (err) => {
+              console.log(err.response.data);
+            }
+          );
           console.log(response);
         }
       }
@@ -93,15 +96,24 @@ const sendBTC = async (id: string, to: string, amount: number) => {
   });
 };
 
-const buildCoinbaseHeaders = (url: string, method: string, body: any = '') => {
-  const timestamp = Date.now() / 1000;
-  const what = `${timestamp}${method}${url}${body}`;
-  const key = Buffer.from(process.env.API_KEY_SECRET!, 'base64');
-  const hmac = createHmac('sha256', key);
-  const signature = hmac.update(what).digest('base64');
-  return {
-    'CB-ACCESS-KEY': process.env.API_KEY,
+const buildCoinbaseHeaders = (
+  url: string,
+  method: 'GET' | 'POST',
+  body?: Record<string, unknown>
+) => {
+  const timestamp = Math.floor(DateTime.utc().toMillis() / 1000);
+  let what = timestamp + method + url;
+  if (body) {
+    what += JSON.stringify(body);
+  }
+  const hmac = createHmac('sha256', process.env.API_KEY_SECRET!);
+  const signature = hmac.update(what).digest('hex');
+  const headers = {
+    'CB-ACCESS-KEY': process.env.API_KEY!,
     'CB-ACCESS-SIGN': signature,
-    'CB-ACCESS-TIMESTAMP': timestamp,
+    'CB-ACCESS-TIMESTAMP': timestamp.toString(),
+    'CB-VERSION': '2021-12-09',
   };
+  console.log(headers);
+  return headers;
 };

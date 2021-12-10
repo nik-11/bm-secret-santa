@@ -102,7 +102,7 @@ function ContactGround() {
 export default function (props) {
   const welcome = useStore((state) => state.welcome);
   const count = useStore((state) => state.count);
-  if (count === 5) {
+  if (count === 100) {
     props.wonGame(true);
   }
   const { reset } = useStore((state) => state.api);
@@ -138,7 +138,7 @@ export default function (props) {
           allowSleep={false}>
           <mesh position={[0, 0, -10]} receiveShadow>
             <planeBufferGeometry attach="geometry" args={[1000, 1000]} />
-            <meshPhongMaterial attach="material" color="#374037" />
+            <meshPhongMaterial attach="material" color="#4e4e4e" />
           </mesh>
           <ContactGround />
           {!welcome && <Ball />}

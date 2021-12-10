@@ -1,4 +1,7 @@
-.history
+.history/
+
+cdk.out/
+frontend/build/
 
 # Logs
 logs

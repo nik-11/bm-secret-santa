@@ -14,6 +14,7 @@
     "@react-three/fiber": "6.0.14",
     "@reonomy/react-confetti-explosion": "^1.0.3",
     "antd": "^4.17.3",
+    "axios": "^0.24.0",
     "lerp": "1.0.3",
     "lodash-es": "4.17.21",
     "react": "17.0.2",

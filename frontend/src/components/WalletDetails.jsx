@@ -1,4 +1,5 @@
 import { Form, Input, Button } from 'antd';
+import { useState } from 'react';
 import ConfettiExplosion from '@reonomy/react-confetti-explosion';
 
 const confettiProps = {
@@ -10,11 +11,10 @@ const confettiProps = {
 };
 
 const WalletDetails = (props) => {
+  const [loading, setLoading] = useState(false);
+
   const onFinish = (values) => {
-    // TODO: async api call
-    if (values.code === '1234') {
-      props.loggedIn(true);
-    }
+    // It should arrive in your account within 1 day
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -38,7 +38,7 @@ const WalletDetails = (props) => {
           </Form.Item>
 
           <Form.Item wrapperCol={{ div: 16 }}>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" loading={loading}>
               Submit
             </Button>
           </Form.Item>
